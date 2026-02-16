@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的第一个网页 - RuigeTest</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .card li:last-child {
+            border-bottom: none;
+        }
+        
+        .card li i {
+            color: #764ba2;
+        }
+        
+        .demo-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .demo-section h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+        }
+        
+        .demo-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        #currentTime {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            color: #764ba2;
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            border-top: 1px solid #eee;
+            margin-top: 2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: #667eea;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: #764ba2;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav a {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .demo-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-code"></i> 欢迎来到RuigeTest</h1>
+            <p class="subtitle">我的第一个网页制作与部署实践</p>
+            <nav>
+                <a href="#home"><i class="fas fa-home"></i> 首页</a>
+                <a href="#guide"><i class="fas fa-book"></i> 制作指南</a>
+                <a href="#deploy"><i class="fas fa-rocket"></i> 部署方法</a>
+                <a href="#demo"><i class="fas fa-play-circle"></i> 功能演示</a>
+            </nav>
+        </header>
+        
+        <div class="main-content">
+            <div class="card">
+                <h2><i class="fas fa-lightbulb"></i> 网页制作要点</h2>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> 学习HTML/CSS基础</li>
+                    <li><i class="fas fa-check-circle"></i> 掌握响应式设计</li>
+                    <li><i class="fas fa-check-circle"></i> 添加JavaScript交互</li>
+                    <li><i class="fas fa-check-circle"></i> 优化页面性能</li>
+                    <li><i class="fas fa-check-circle"></i> 测试跨浏览器兼容性</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h2><i class="fas fa-cloud-upload-alt"></i> 部署平台推荐</h2>
+                <ul>
+                    <li><i class="fab fa-github"></i> GitHub Pages (免费)</li>
+                    <li><i class="fas fa-bolt"></i> Vercel (快速部署)</li>
+                    <li><i class="fas fa-network-wired"></i> Netlify (功能全面)</li>
+                    <li><i class="fas fa-shield-alt"></i> Cloudflare Pages (安全快速)</li>
+                    <li><i class="fas fa-server"></i> 自有服务器 (完全控制)</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h2><i class="fas fa-tools"></i> 必备工具</h2>
+                <ul>
+                    <li><i class="fas fa-code"></i> VS Code编辑器</li>
+                    <li><i class="fab fa-git-alt"></i> Git版本控制</li>
+                    <li><i class="fas fa-window-restore"></i> 浏览器开发者工具</li>
+                    <li><i class="fas fa-terminal"></i> 命令行工具</li>
+                    <li><i class="fas fa-palette"></i> 设计工具 (Figma等)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2><i class="fas fa-play-circle"></i> 功能演示</h2>
+            <p>当前时间：<span id="currentTime">加载中...</span></p>
+            
+            <div class="demo-buttons">
+                <button class="btn btn-primary" id="showMessage">
+                    <i class="fas fa-comment"></i> 点击显示欢迎消息
+                </button>
+                <button class="btn btn-secondary" id="changeTheme">
+                    <i class="fas fa-moon"></i> 切换主题颜色
+                </button>
+                <button class="btn btn-primary" id="addItem">
+                    <i class="fas fa-plus"></i> 添加示例项目
+                </button>
+            </div>
+            
+            <div id="itemList" style="margin-top: 2rem;">
+                <h3>动态添加的项目：</h3>
+                <ul id="items"></ul>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2024 RuigeTest - 网页制作与部署实践项目</p>
+            <p>这是一个完全由HTML/CSS/JavaScript构建的静态网页示例</p>
+            
+            <div class="social-links">
+                <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" title="文档"><i class="fas fa-book"></i></a>
+                <a href="#" title="部署指南"><i class="fas fa-rocket"></i></a>
+                <a href="#" title="联系"><i class="fas fa-envelope"></i></a>
+            </div>
+            
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: #888;">
+                提示：将此项目推送到GitHub，然后使用Vercel或Netlify一键部署！
+            </p>
+        </footer>
+    </div>
+    
+    <script>
+        // 更新时间显示
+        function updateTime() {
+            const now = new Date();
+            const timeElement = document.getElementById('currentTime');
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: false
+            };
+            timeElement.textContent = now.toLocaleString('zh-CN', options);
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('RuigeTest网页加载完成！');
+            
+            // 初始化时间
+            updateTime();
+            setInterval(updateTime, 1000);
+            
+            // 欢迎消息按钮
+            document.getElementById('showMessage').addEventListener('click', function() {
+                alert('🎉 欢迎访问RuigeTest！\n这是一个演示如何制作和部署网页的示例项目。\n\n查看项目目录中的详细指南文档，学习如何制作自己的网页！');
+            });
+            
+            // 主题切换按钮
+            let isDarkTheme = false;
+            document.getElementById('changeTheme').addEventListener('click', function() {
+                isDarkTheme = !isDarkTheme;
+                const body = document.body;
+                const button = this;
+                
+                if (isDarkTheme) {
+                    body.style.background = 'linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%)';
+                    body.style.color = '#f0f0f0';
+                    button.innerHTML = '<i class="fas fa-sun"></i> 切换为亮色主题';
+                    button.classList.remove('btn-secondary');
+                    button.classList.add('btn-primary');
+                } else {
+                    body.style.background = 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)';
+                    body.style.color = '#333';
+                    button.innerHTML = '<i class="fas fa-moon"></i> 切换主题颜色';
+                    button.classList.remove('btn-primary');
+                    button.classList.add('btn-secondary');
+                }
+            });
+            
+            // 添加项目按钮
+            let itemCount = 0;
+            document.getElementById('addItem').addEventListener('click', function() {
+                itemCount++;
+                const itemsList = document.getElementById('items');
+                const newItem = document.createElement('li');
+                newItem.innerHTML = `<i class="fas fa-star" style="color: #ffd700;"></i> 示例项目 ${itemCount} - 创建于 ${new Date().toLocaleTimeString('zh-CN')}`;
+                itemsList.appendChild(newItem);
+                
+                // 显示提示
+                if (itemCount === 1) {
+                    document.getElementById('itemList').style.display = 'block';
+                }
+            });
+            
+            // 初始隐藏项目列表
+            document.getElementById('itemList').style.display = 'none';
+            
+            // 添加键盘快捷键
+            document.addEventListener('keydown', function(event) {
+                // Ctrl + M 显示消息
+                if (event.ctrlKey && event.key === 'm') {
+                    event.preventDefault();
+                    document.getElementById('showMessage').click();
+                }
+                
+                // Ctrl + A 添加项目
+                if (event.ctrlKey && event.key === 'a') {
+                    event.preventDefault();
+                    document.getElementById('addItem').click();
+                }
+            });
+            
+            // 显示键盘快捷键提示
+            console.log('键盘快捷键：\nCtrl+M - 显示欢迎消息\nCtrl+A - 添加示例项目');
+        });
+        
+        // 页面离开前提示
+        window.addEventListener('beforeunload', function(event) {
+            // 可以在这里添加保存提示等
+        });
+    </script>
+</body>
+</html>

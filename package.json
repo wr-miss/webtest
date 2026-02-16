@@ -1,0 +1,45 @@
+{
+  "name": "ruigetest",
+  "version": "1.0.0",
+  "description": "一个完整的网页制作与部署示例项目",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -p 8080",
+    "dev": "python3 -m http.server 8000",
+    "test": "echo \"打开浏览器访问 http://localhost:8080\" && npm start",
+    "deploy:github": "./deploy.sh 2",
+    "deploy:vercel": "vercel --prod",
+    "deploy:netlify": "netlify deploy --prod",
+    "deploy:all": "./deploy.sh 5",
+    "build": "echo \"无需构建，这是一个静态网站\"",
+    "lint": "echo \"代码检查暂未配置\"",
+    "format": "echo \"代码格式化暂未配置\""
+  },
+  "keywords": [
+    "website",
+    "tutorial",
+    "deployment",
+    "html",
+    "css",
+    "javascript",
+    "beginner"
+  ],
+  "author": "RuigeTest",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/ruigetest.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/ruigetest/issues"
+  },
+  "homepage": "https://your-username.github.io/ruigetest",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  }
+}
