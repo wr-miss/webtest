@@ -11,9 +11,11 @@
     "deploy:vercel": "vercel --prod",
     "deploy:netlify": "netlify deploy --prod",
     "deploy:all": "./deploy.sh 5",
-    "build": "echo \"无需构建，这是一个静态网站\"",
-    "lint": "echo \"代码检查暂未配置\"",
-    "format": "echo \"代码格式化暂未配置\""
+    "build": "echo \"构建静态网站...\" && npm run build:css && npm run build:js",
+    "build:css": "npx cleancss -o style.min.css style.css",
+    "build:js": "npx uglify-js script.js -o script.min.js --compress --mangle",
+    "lint": "npx eslint . --ext .js --fix || echo \"ESLint未安装，运行 'npm install --save-dev eslint' 安装\"",
+    "format": "npx prettier --write . || echo \"Prettier未安装，运行 'npm install --save-dev prettier' 安装\""
   },
   "keywords": [
     "website",
@@ -27,7 +29,9 @@
   "author": "RuigeTest",
   "license": "MIT",
   "devDependencies": {
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "clean-css-cli": "^5.3.3",
+    "uglify-js": "^3.17.4"
   },
   "dependencies": {},
   "repository": {
