@@ -10,15 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     
     # 【安全拦截】只有评论内容包含 "@claude" 时才会触发此任务
-    # 注意：如果你的习惯是 @机器人名字，请把这里的 @claude 换成你的机器人名字
     if: contains(github.event.comment.body, '@claude')
     
     steps:
-      # 第 1 步：将仓库代码拉取到当前运行的虚拟服务器中，以便 Claude 可以读取
+      # 第 1 步：将仓库代码拉取到当前运行的虚拟服务器中
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # 第 2 步：使用你的 GitHub App 凭证，换取具有高权限的临时 Token
+      # 第 2 步：使用 GitHub App 凭证，换取临时 Token
       - name: Generate GitHub App token
         id: app-token
         uses: actions/create-github-app-token@v1
@@ -26,18 +25,15 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
-      # 第 3 步：召唤 Claude 处理任务
-      - name: Run Claude Code
+      # 第 3 步：召唤 AI（此处已接管为 DeepSeek）
+      - name: Run AI Code Assistant
         uses: anthropics/claude-code-action@v1
         env:
-          # 👇 【必须修改】将双引号里的网址，替换成你购买的第三方 API 代理的实际地址
-          ANTHROPIC_BASE_URL: "https://api.deepseek.com/anthropic" 
+          # DeepSeek 官方的 Anthropic 兼容接口
+          ANTHROPIC_BASE_URL: "https://api.deepseek.com/anthropic"
+          # 强制指定调用的模型为 deepseek-chat
+          ANTHROPIC_MODEL: "deepseek-chat"
         with:
-          # 读取你在 GitHub Secrets 中配置的第三方 API Key
+          # 注意：记得把你的 DeepSeek API Key 存入 GitHub Secrets 的 ANTHROPIC_API_KEY 中
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          # 传入第 2 步获取到的高权限临时 Token
           github_token: ${{ steps.app-token.outputs.token }}
-          
-          # 选填：如果你的第三方代理要求强制指定某个模型名称，可以取消下面两行的注释并修改
-          claude_env: |
-          MODEL: "DeepSeek-V3.2"
